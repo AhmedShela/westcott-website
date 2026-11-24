@@ -1,0 +1,27 @@
+---
+// Simple pages: Membership, Volunteer and Jobs. Edit them in the CMS under "Pages".
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import InfoBox from '../components/InfoBox.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages', ({ id, data }) => !['about', 'donate', 'contact'].includes(id) && data.lang === 'en');
+  return pages.map((p) => ({ params: { page: p.id }, props: { page: p } }));
+}
+const { page } = Astro.props;
+const { Content } = await render(page);
+const d = page.data;
+const linksLabel = page.id === 'jobs' ? 'Current openings' : 'Links';
+---
+<Base title={d.title} description={d.description} image={d.image}>
+  <div class="page-head"><div class="wrap"><h1>{d.title}</h1><p class="lead">{d.description}</p></div></div>
+  <div class="section">
+    <div class="wrap two-col">
+      <div class="prose">
+        {d.image && <img src={d.image} alt={d.imageAlt ?? ''} />}
+        <Content />
+      </div>
+      <InfoBox links={d.links} moreLabel={linksLabel} />
+    </div>
+  </div>
+</Base>

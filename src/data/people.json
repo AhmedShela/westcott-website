@@ -1,0 +1,22 @@
+{
+  "staff": [
+    { "name": "Joan Royle", "title": "Executive Director" },
+    { "name": "Jessica Ginney", "title": "Director of Operations" }
+  ],
+  "board": [
+    { "name": "Todd Goehle", "title": "Chair" },
+    { "name": "Libby Murphy", "title": "Vice Chair" },
+    { "name": "Jonathan Kalinowski", "title": "Treasurer" },
+    { "name": "Eleanor Maine", "title": "Secretary" },
+    { "name": "Chuck Baracco" },
+    { "name": "Paula Freedman" },
+    { "name": "Jacqueline Pilon" },
+    { "name": "Cainaan Webb" },
+    { "name": "Greg Marcus" },
+    { "name": "Jason Scharf" },
+    { "name": "Jim Corbo" },
+    { "name": "Nathan Jerauld" },
+    { "name": "Norman Paul" },
+    { "name": "Ken Casarsa" }
+  ]
+}

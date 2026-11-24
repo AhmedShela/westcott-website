@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+import { useTranslations, defaultLang, type Lang } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  lang?: Lang;
+}
+const { title, description = site.tagline, image = '/uploads/westcott-logo.png', lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+const fullTitle = title === site.name ? site.name : `${title} | ${site.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#c00000" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'NGO',
+      name: site.name,
+      url: 'https://westcottcc.org',
+      logo: 'https://westcottcc.org/uploads/westcott-logo.png',
+      telephone: site.phone,
+      email: site.email,
+      address: { '@type': 'PostalAddress', streetAddress: '826 Euclid Ave', addressLocality: 'Syracuse', addressRegion: 'NY', postalCode: '13210', addressCountry: 'US' },
+      sameAs: site.social.map((s) => s.url),
+    })} />
+  </head>
+  <body>
+    <a class="skip" href="#main">{t('skip')}</a>
+    {site.alert.show && site.alert.text && (
+      <div class="alert" role="region" aria-label="Announcement">
+        <div class="wrap">
+          <strong>{site.alert.text}</strong>
+          {site.alert.linkUrl && <a href={site.alert.linkUrl}>{site.alert.linkLabel || 'Learn more'}</a>}
+        </div>
+      </div>
+    )}
+    <Header lang={lang} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>
+<style>
+  .alert { background: var(--ink); color: #fff; padding: .6rem 0; font-size: .95rem; }
+  .alert .wrap { display: flex; flex-wrap: wrap; gap: .4rem 1rem; }
+  .alert a { color: #fff; }
+  main:focus { outline: none; }
+</style>

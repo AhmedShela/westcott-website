@@ -1,0 +1,58 @@
+---
+import site from '../data/site.json';
+import { useTranslations, defaultLang, type Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div>
+      <img src="/uploads/westcott-logo.png" alt="Westcott Community Center logo" width="88" height="85" />
+      <p class="tag">{site.tagline}</p>
+    </div>
+    <div>
+      <h2>{t('footer.contact')}</h2>
+      <p>
+        <a href={`tel:${site.phone.replace(/\D/g, '')}`}>{site.phone}</a><br />
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      <p><strong>{t('footer.center')}:</strong> {site.centerAddress}<br />
+        <strong>{t('footer.annex')}:</strong> {site.annexAddress}<br />
+        <strong>{t('footer.mailing')}:</strong> {site.mailingAddress}</p>
+    </div>
+    <div>
+      <h2>{t('footer.hours')}</h2>
+      <p>{site.hours}</p>
+      <h2>{t('footer.follow')}</h2>
+      <ul class="social">
+        {site.social.map((s) => <li><a href={s.url} rel="noopener">{s.label}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h2>{t('nav.involved')}</h2>
+      <ul class="links">
+        <li><a href="/donate/">{t('nav.donate')}</a></li>
+        <li><a href="/membership/">{t('nav.membership')}</a></li>
+        <li><a href="/volunteer/">{t('nav.volunteer')}</a></li>
+        <li><a href="/jobs/">{t('nav.jobs')}</a></li>
+        <li><a href="/about/leadership/">{t('nav.leadership')}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <p>© {year} {site.name}. {t('footer.nonprofit')}</p>
+  </div>
+</footer>
+<style>
+  .site-footer { background: var(--ink); color: #eee; padding: 3rem 0 1.5rem; margin-top: 0; }
+  .site-footer a { color: #fff; }
+  .cols { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+  .site-footer h2 { font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; color: #ff9a9a; margin: 0 0 .6rem; }
+  .site-footer h2 + p { font-size: .97rem; }
+  .site-footer img { background: #fff; border-radius: 50%; padding: 4px; margin-bottom: 1rem; }
+  .tag { font-size: .97rem; color: #ccc; }
+  ul { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: .35rem; }
+  .legal { border-top: 1px solid #3a3a3d; margin-top: 2rem; padding-top: 1.25rem; font-size: .88rem; color: #bbb; }
+</style>

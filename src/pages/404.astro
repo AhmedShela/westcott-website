@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { useTranslations } from '../i18n/ui';
+const t = useTranslations('en');
+---
+<Base title={t('notfound.title')}>
+  <div class="section"><div class="narrow">
+    <h1>{t('notfound.title')}</h1>
+    <p class="lead">{t('notfound.text')}</p>
+    <p><a class="btn" href="/">{t('back.home')}</a> <a class="btn ghost" href="/programs/">{t('nav.programs')}</a></p>
+  </div></div>
+</Base>

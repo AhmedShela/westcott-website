@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { program: CollectionEntry<'programs'>; headingLevel?: 'h2' | 'h3' }
+const { program, headingLevel = 'h3' } = Astro.props;
+const { title, summary, image, imageAlt, schedule } = program.data;
+const H = headingLevel;
+const isLogo = image && /logo|\.png$/i.test(image);
+---
+<article class="card">
+  {image && <img src={image} alt={imageAlt ?? ''} loading="lazy" class={isLogo ? 'contain' : undefined} />}
+  <div class="body">
+    <H><a href={`/programs/${program.id}/`}>{title}</a></H>
+    <p>{summary}</p>
+    {schedule && <p class="meta">{schedule}</p>}
+  </div>
+</article>

@@ -1,0 +1,31 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import { useTranslations } from '../i18n/ui';
+const t = useTranslations('en');
+const page = (await getEntry('pages', 'contact'))!;
+const { Content } = await render(page);
+const tel = `tel:${site.phone.replace(/\D/g, '')}`;
+---
+<Base title={page.data.title} description={page.data.description}>
+  <div class="page-head"><div class="wrap"><h1>{page.data.title}</h1><div class="lead"><Content /></div></div></div>
+  <div class="section">
+    <div class="wrap cards">
+      <div class="info"><h2>Call</h2><p><a href={tel}>{site.phone}</a></p></div>
+      <div class="info"><h2>Email</h2><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
+      <div class="info"><h2>{t('footer.hours')}</h2><p>{site.hours}</p></div>
+      <div class="info"><h2>Visit</h2>
+        <p><strong>{t('footer.center')}:</strong> {site.centerAddress}<br /><strong>{t('footer.annex')}:</strong> {site.annexAddress}</p>
+        <p><a href={site.mapUrl} rel="noopener">{t('contact.directions')}</a></p>
+      </div>
+      <div class="info"><h2>{t('footer.mailing')}</h2><p>{site.mailingAddress}</p></div>
+      <div class="info"><h2>{t('footer.follow')}</h2><ul class="link-list">{site.social.map((s) => <li><a href={s.url} rel="noopener">{s.label}</a></li>)}</ul></div>
+    </div>
+  </div>
+</Base>
+<style>
+  .cards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .cards h2 { margin: 0 0 .4rem; font-size: 1.1rem; }
+  .cards p:last-child { margin: 0; }
+</style>

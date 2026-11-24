@@ -1,0 +1,40 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import site from '../../data/site.json';
+import { useTranslations } from '../../i18n/ui';
+const t = useTranslations('en');
+const page = (await getEntry('pages', 'about'))!;
+const { Content } = await render(page);
+---
+<Base title={page.data.title} description={page.data.description}>
+  <div class="page-head"><div class="wrap"><h1>{page.data.title}</h1><p class="lead">{page.data.description}</p></div></div>
+  <div class="section">
+    <div class="wrap two-col">
+      <div class="prose"><Content /><p><a href="/about/leadership/">{t('nav.leadership')}</a></p></div>
+      <aside class="info">
+        <h2 class="side-h">{t('about.reports')}</h2>
+        <p>{t('about.reportsIntro')}</p>
+        <ul class="link-list">{site.annualReports.map((r) => <li><a href={r.url}>{r.label} <span class="sr">(PDF)</span></a></li>)}</ul>
+      </aside>
+    </div>
+  </div>
+  <section class="section alt" aria-labelledby="h-sp">
+    <div class="wrap">
+      <h2 id="h-sp" class="first">{t('about.sponsors')}</h2>
+      <ul class="sponsors">
+        {site.sponsors.map((s) => (
+          <li>{s.url ? <a href={s.url} rel="noopener"><img src={s.logo} alt={s.name} loading="lazy" /></a> : <img src={s.logo} alt={s.name} loading="lazy" />}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .first, .side-h { margin-top: 0; }
+  .side-h { font-size: 1.2rem; }
+  .sr { color: var(--ink-soft); font-weight: 400; }
+  .sponsors { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .sponsors li { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 1rem; display: grid; place-items: center; height: 120px; }
+  .sponsors img { max-height: 88px; width: auto; object-fit: contain; }
+</style>

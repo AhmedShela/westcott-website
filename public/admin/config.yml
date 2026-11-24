@@ -1,0 +1,195 @@
+# Editor settings for the Westcott Community Center website.
+# Staff open https://westcottcc.org/admin/ and sign in with GitHub.
+# Every field below matches a field in src/content.config.ts.
+
+backend:
+  name: github
+  repo: AhmedShela/westcott-website   # change when the repo moves to the center's GitHub organization
+  branch: main
+  # Sign-in helper (a free Cloudflare Worker, see docs/HOSTING.md). Fill in after it is set up.
+  # base_url: https://westcott-cms-auth.<account>.workers.dev
+
+site_url: https://westcottcc.org
+display_url: https://westcottcc.org
+logo:
+  src: /uploads/westcott-logo.png
+
+media_folder: public/uploads
+public_folder: /uploads
+
+editor:
+  preview: false
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: events
+    label: Events
+    label_singular: Event
+    description: One-time events such as the Art Trail, workshops or info sessions. Past events move to "Past events" by themselves.
+    folder: src/content/events
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [date, title]
+    summary: "{{date | date('MMM D, YYYY')}} · {{title}}"
+    fields:
+      - { name: title, label: Event name, widget: string }
+      - { name: date, label: Date, widget: datetime, time_format: false, date_format: "MMM D, YYYY", format: "YYYY-MM-DD" }
+      - { name: endDate, label: End date (only for multi-day events), widget: datetime, time_format: false, date_format: "MMM D, YYYY", format: "YYYY-MM-DD", required: false }
+      - { name: time, label: Time, widget: string, required: false, hint: "For example: 10:00 AM to 2:00 PM" }
+      - { name: location, label: Location, widget: string, required: false, default: "Westcott Community Center, 826 Euclid Ave" }
+      - { name: summary, label: Short description (one or two sentences), widget: text }
+      - { name: image, label: Image or flyer, widget: image, required: false }
+      - { name: imageAlt, label: Describe the image (for people using screen readers), widget: string, required: false }
+      - { name: program, label: Related program, widget: relation, collection: programs, search_fields: [title], value_field: "{{slug}}", display_fields: [title], required: false }
+      - name: links
+        label: Links (registration, flyers, PDFs)
+        widget: list
+        required: false
+        fields:
+          - { name: label, label: Link text, widget: string }
+          - { name: url, label: Web address or file, widget: file }
+      - { name: body, label: Full description, widget: markdown, required: false }
+      - { name: draft, label: Hide from the website (draft), widget: boolean, default: false }
+      - { name: lang, label: Language, widget: hidden, default: en }
+
+  - name: programs
+    label: Programs
+    label_singular: Program
+    description: Every service and program the center offers.
+    folder: src/content/programs
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [title, category, order]
+    view_groups:
+      - { label: Category, field: category }
+    fields:
+      - { name: title, label: Program name, widget: string }
+      - name: category
+        label: Category
+        widget: select
+        options:
+          - { label: Community Services, value: community-services }
+          - { label: Jobs & Training, value: employment }
+          - { label: Arts & Culture, value: arts-culture }
+          - { label: Collaborations, value: collaborations }
+      - { name: summary, label: Short description (shown on cards), widget: text }
+      - { name: image, label: Main image, widget: image, required: false }
+      - { name: imageAlt, label: Describe the image (for people using screen readers), widget: string, required: false }
+      - { name: schedule, label: When it happens, widget: string, required: false, hint: "For example: Thursdays, 5:00 PM to 6:30 PM" }
+      - { name: location, label: Where, widget: string, required: false }
+      - name: contacts
+        label: Contact people
+        widget: list
+        required: false
+        fields:
+          - { name: name, label: Name, widget: string, required: false }
+          - { name: role, label: Job title, widget: string, required: false }
+          - { name: phone, label: Phone, widget: string, required: false }
+          - { name: email, label: Email, widget: string, required: false }
+      - name: links
+        label: Links and files (flyers, applications, partner sites)
+        widget: list
+        required: false
+        fields:
+          - { name: label, label: Link text, widget: string }
+          - { name: url, label: Web address or file, widget: file }
+      - { name: externalUrl, label: Partner website (adds a "Visit website" button), widget: string, required: false }
+      - { name: body, label: Full description, widget: markdown }
+      - { name: featured, label: Show on the home page, widget: boolean, default: false }
+      - { name: order, label: Order in its category (lower comes first), widget: number, default: 100, value_type: int }
+      - { name: draft, label: Hide from the website (draft), widget: boolean, default: false }
+      - { name: lang, label: Language, widget: hidden, default: en }
+
+  - name: pages
+    label: Pages
+    description: About, Donate, Membership, Volunteer, Jobs and Contact.
+    folder: src/content/pages
+    create: false
+    delete: false
+    fields:
+      - { name: title, label: Page title, widget: string }
+      - { name: description, label: Intro sentence, widget: text }
+      - { name: image, label: Image, widget: image, required: false }
+      - { name: imageAlt, label: Describe the image, widget: string, required: false }
+      - name: links
+        label: Links (for Jobs, each opening is a link)
+        widget: list
+        required: false
+        fields:
+          - { name: label, label: Link text, widget: string }
+          - { name: url, label: Web address or file, widget: file }
+      - { name: body, label: Page text, widget: markdown }
+      - { name: lang, label: Language, widget: hidden, default: en }
+
+  - name: settings
+    label: Settings
+    files:
+      - name: site
+        label: Contact info, hours, stats and sponsors
+        file: src/data/site.json
+        fields:
+          - { name: name, label: Center name, widget: string }
+          - { name: tagline, label: Mission statement, widget: text }
+          - { name: intro, label: Home page intro, widget: text }
+          - { name: hours, label: Hours, widget: string }
+          - { name: phone, label: Main phone, widget: string }
+          - { name: email, label: Main email, widget: string }
+          - { name: centerAddress, label: Center address, widget: string }
+          - { name: annexAddress, label: Annex address, widget: string }
+          - { name: mailingAddress, label: Mailing address, widget: string }
+          - { name: mapUrl, label: Map link, widget: string }
+          - { name: donateUrl, label: PayPal donate link, widget: string }
+          - { name: venmoUrl, label: Venmo link, widget: string }
+          - { name: newsletterUrl, label: Newsletter sign-up link, widget: string, required: false }
+          - name: alert
+            label: Announcement banner (top of every page, e.g. closed for snow)
+            widget: object
+            fields:
+              - { name: show, label: Show the banner, widget: boolean, default: false }
+              - { name: text, label: Message, widget: string, required: false }
+              - { name: linkLabel, label: Link text, widget: string, required: false }
+              - { name: linkUrl, label: Link, widget: string, required: false }
+          - name: social
+            label: Social media
+            widget: list
+            fields:
+              - { name: label, label: Name, widget: string }
+              - { name: url, label: Link, widget: string }
+          - name: stats
+            label: Impact numbers (home page)
+            widget: list
+            fields:
+              - { name: value, label: Number, widget: string }
+              - { name: label, label: What it counts, widget: string }
+          - name: annualReports
+            label: Annual reports
+            widget: list
+            fields:
+              - { name: label, label: Name, widget: string }
+              - { name: url, label: File or link, widget: file }
+          - name: sponsors
+            label: Sponsors
+            widget: list
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: logo, label: Logo, widget: image }
+              - { name: url, label: Website, widget: string, required: false }
+      - name: people
+        label: Leadership and Board
+        file: src/data/people.json
+        fields:
+          - name: staff
+            label: Leadership team
+            widget: list
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: title, label: Title, widget: string, required: false }
+          - name: board
+            label: Board of Directors
+            widget: list
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: title, label: Board role (Chair, Treasurer...), widget: string, required: false }

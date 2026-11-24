@@ -1,0 +1,142 @@
+{
+  "name": "Westcott Community Center",
+  "tagline": "Investing in our community by offering essential services and engaging programming to embrace the diverse needs of all.",
+  "intro": "A community resource serving the Westcott neighborhood and greater Syracuse through a variety of programs and services. Stop in and find out more.",
+  "hours": "Monday to Friday, 9:00 AM to 4:30 PM, with some evening program hours.",
+  "phone": "315.478.8634",
+  "email": "info@westcottcc.org",
+  "centerAddress": "826 Euclid Ave, Syracuse, NY 13210",
+  "annexAddress": "821 Euclid Ave, Syracuse, NY 13210",
+  "mailingAddress": "821 Euclid Ave, Syracuse, NY 13210",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=826+Euclid+Ave+Syracuse+NY+13210",
+  "donateUrl": "https://www.paypal.com/donate/?hosted_button_id=E7ZHQ6MZ32R7A",
+  "venmoUrl": "https://www.venmo.com/u/westcott_cc",
+  "newsletterUrl": "",
+  "social": [
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/westcottcommunitycenter/"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/westcott_cc/"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/company/westcott-community-center/"
+    }
+  ],
+  "alert": {
+    "show": false,
+    "text": "",
+    "linkLabel": "",
+    "linkUrl": ""
+  },
+  "stats": [
+    {
+      "value": "1,177",
+      "label": "Workforce development participants served"
+    },
+    {
+      "value": "59,345",
+      "label": "Pantry meals distributed"
+    },
+    {
+      "value": "1,450",
+      "label": "After-school students served"
+    },
+    {
+      "value": "702",
+      "label": "Older adults served"
+    }
+  ],
+  "annualReports": [
+    {
+      "label": "2026 Annual Report",
+      "url": "https://westcottcc.org/wp-content/uploads/2026/11/Annual-Report-2025-26.pdf"
+    },
+    {
+      "label": "2025 Annual Report",
+      "url": "https://westcottcc.org/wp-content/uploads/2025/11/Annual-Report-2024-25-FINAL-for-Email.pdf"
+    },
+    {
+      "label": "2024 Annual Report",
+      "url": "https://westcottcc.org/wp-content/uploads/2024/11/Annual-Report-2023-24-FINAL.pdf"
+    },
+    {
+      "label": "2023 Annual Report",
+      "url": "https://westcottcc.org/wp-content/uploads/2023/11/Annual-Report-2022-23-FINAL.pdf"
+    },
+    {
+      "label": "2022 Annual Report",
+      "url": "https://westcottcc.org/wp-content/uploads/2022/12/Annual-Report-2021-2022-FINAL.pdf"
+    },
+    {
+      "label": "2021 Annual Report",
+      "url": "https://westcottcc.org/wp-content/uploads/2022/03/Annual-Report-20-2021.pdf"
+    },
+    {
+      "label": "2020 Annual Report",
+      "url": "https://westcottcc.org/wp-content/uploads/2020/06/2020-Annual-Report.pdf"
+    },
+    {
+      "label": "2019 Annual Report",
+      "url": "https://westcottcc.org/wp-content/uploads/2020/01/WestcottCC-Annual-Report-2018-19.pdf"
+    },
+    {
+      "label": "2018 Annual Report",
+      "url": "https://westcottcc.org/wp-content/uploads/2020/01/Final-2018-Annual-Report.pdf"
+    },
+    {
+      "label": "2017 Annual Report",
+      "url": "https://westcottcc.org/wp-content/uploads/2020/01/Publisher-Annual-Report.pdf"
+    }
+  ],
+  "sponsors": [
+    {
+      "name": "United Way of Central New York",
+      "logo": "/uploads/sponsors/united-way-cny.webp",
+      "url": "https://unitedway-cny.org/"
+    },
+    {
+      "name": "Onondaga County Office for Aging",
+      "logo": "/uploads/sponsors/onondaga-county-office-for-aging.webp",
+      "url": "http://www.ongov.net/aging/"
+    },
+    {
+      "name": "City of Syracuse",
+      "logo": "/uploads/sponsors/city-of-syracuse.webp",
+      "url": "https://www.syr.gov/"
+    },
+    {
+      "name": "Syracuse City School District",
+      "logo": "/uploads/sponsors/syracuse-city-school-district.png",
+      "url": "https://www.syracusecityschools.com/"
+    },
+    {
+      "name": "CenterState CEO",
+      "logo": "/uploads/sponsors/centerstate-ceo.webp",
+      "url": "https://www.centerstateceo.com/"
+    },
+    {
+      "name": "New York State Council on the Arts",
+      "logo": "/uploads/sponsors/nys-council-on-the-arts.png",
+      "url": "https://arts.ny.gov/"
+    },
+    {
+      "name": "CNY Arts",
+      "logo": "/uploads/sponsors/cny-arts.png",
+      "url": "https://cnyarts.org/"
+    },
+    {
+      "name": "Downtown Syracuse Foundation",
+      "logo": "/uploads/sponsors/downtown-syracuse-foundation.webp",
+      "url": "https://downtownsyracuse.com/"
+    },
+    {
+      "name": "OneGroup Retirement Advisors",
+      "logo": "/uploads/sponsors/onegroup.png",
+      "url": ""
+    }
+  ]
+}

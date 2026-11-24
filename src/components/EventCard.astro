@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { shortDate } from '../lib/content';
+interface Props { event: CollectionEntry<'events'> }
+const { event } = Astro.props;
+const { title, summary, date, time, location } = event.data;
+const d = shortDate(date);
+---
+<article class="card event">
+  <div class="body">
+    <div class="date" aria-hidden="true"><span>{d.month}</span><strong>{d.day}</strong></div>
+    <div>
+      <h3><a href={`/events/${event.id}/`}>{title}</a></h3>
+      <p class="meta"><time datetime={date.toISOString().slice(0, 10)}>{date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</time>{time && <>, {time}</>}</p>
+      {location && <p class="meta">{location}</p>}
+      <p>{summary}</p>
+    </div>
+  </div>
+</article>
+<style>
+  .event .body { flex-direction: row; gap: 1rem; align-items: flex-start; }
+  .date { flex: none; width: 64px; text-align: center; border-radius: 10px; background: var(--red); color: #fff; padding: .4rem 0; font-family: var(--font-head); line-height: 1.1; }
+  .date span { display: block; text-transform: uppercase; font-size: .8rem; font-weight: 700; }
+  .date strong { font-size: 1.6rem; }
+</style>

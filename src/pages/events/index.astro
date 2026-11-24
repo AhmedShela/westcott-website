@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import EventCard from '../../components/EventCard.astro';
+import { getEvents, getPrograms } from '../../lib/content';
+import { useTranslations } from '../../i18n/ui';
+const t = useTranslations('en');
+const { upcoming, past } = await getEvents();
+const weekly = (await getPrograms()).filter((p) => p.data.schedule && p.data.category !== 'arts-culture');
+---
+<Base title={t('nav.events')} description="Upcoming events and the regular weekly schedule at Westcott Community Center.">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>{t('nav.events')}</h1>
+      <p class="lead">What's happening at the center.</p>
+    </div>
+  </div>
+  <section class="section" aria-labelledby="h-up">
+    <div class="wrap">
+      <h2 id="h-up" class="first">{t('events.upcoming')}</h2>
+      {upcoming.length ? <div class="grid">{upcoming.map((e) => <EventCard event={e} />)}</div> : <p>{t('events.none')}</p>}
+    </div>
+  </section>
+  <section class="section alt" aria-labelledby="h-weekly">
+    <div class="wrap">
+      <h2 id="h-weekly" class="first">{t('events.weekly')}</h2>
+      <p>{t('events.weeklyIntro')}</p>
+      <table>
+        <thead><tr><th scope="col">Program</th><th scope="col">When</th></tr></thead>
+        <tbody>
+          {weekly.map((p) => <tr><th scope="row"><a href={`/programs/${p.id}/`}>{p.data.title}</a></th><td>{p.data.schedule}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {past.length > 0 && (
+    <section class="section" aria-labelledby="h-past">
+      <div class="wrap">
+        <h2 id="h-past" class="first">{t('events.past')}</h2>
+        <div class="grid">{past.slice(0, 6).map((e) => <EventCard event={e} />)}</div>
+      </div>
+    </section>
+  )}
+</Base>
+<style>
+  .first { margin-top: 0; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  th, td { text-align: left; padding: .85rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th { font-family: var(--font-head); font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--red); }
+  tbody th { font-weight: 600; }
+  @media (max-width: 600px) {
+    thead { display: none; }
+    tr, th, td { display: block; }
+    tbody th { border-bottom: 0; padding-bottom: .2rem; }
+  }
+</style>

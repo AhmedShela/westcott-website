@@ -1,0 +1,100 @@
+/* Westcott Community Center site styles.
+   Brand colors come from the center's logo. Change them here only. */
+:root {
+  --red: #c00000;
+  --red-dark: #8f0000;
+  --red-tint: #fbeaea;
+  --ink: #1d1d1f;
+  --ink-soft: #4a4a4f;
+  --line: #e3ded6;
+  --paper: #ffffff;
+  --cream: #f7f4ef;
+  --focus: #1a5fd0;
+  --radius: 14px;
+  --max: 1120px;
+  --font-head: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Open Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 1rem; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+img { max-width: 100%; height: auto; display: block; }
+h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.2; margin: 0 0 .5em; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; }
+h2 { font-size: clamp(1.45rem, 3vw, 1.9rem); font-weight: 700; margin-top: 1.6em; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0 0 1em; }
+a { color: var(--red-dark); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { width: min(var(--max), 100% - 2rem); margin-inline: auto; }
+.narrow { width: min(760px, 100% - 2rem); margin-inline: auto; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.skip { position: absolute; left: 1rem; top: -100px; background: var(--ink); color: #fff; padding: .6rem 1rem; z-index: 100; border-radius: 8px; }
+.skip:focus { top: 1rem; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem; justify-content: center;
+  padding: .75rem 1.3rem; border-radius: 999px; font-family: var(--font-head); font-weight: 700;
+  font-size: 1rem; text-decoration: none; border: 2px solid var(--red); background: var(--red); color: #fff;
+  min-height: 48px;
+}
+.btn:hover { background: var(--red-dark); border-color: var(--red-dark); }
+.btn.ghost { background: transparent; color: var(--red-dark); }
+.btn.ghost:hover { background: var(--red-tint); }
+.btn.light { background: #fff; color: var(--red-dark); border-color: #fff; }
+
+.eyebrow { font-family: var(--font-head); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; color: var(--red); margin-bottom: .5rem; }
+.lead { font-size: 1.2rem; color: var(--ink-soft); }
+
+/* Page header band */
+.page-head { background: var(--cream); border-bottom: 1px solid var(--line); padding: 2.5rem 0 2rem; }
+.page-head p { max-width: 60ch; }
+.section { padding: 3rem 0; }
+.section.alt { background: var(--cream); }
+
+/* Cards */
+.grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.card {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+  display: flex; flex-direction: column; position: relative;
+}
+.card:hover { border-color: #cfc6b8; box-shadow: 0 6px 20px rgb(0 0 0 / .06); }
+.card img { aspect-ratio: 16/10; object-fit: cover; width: 100%; background: var(--cream); }
+.card img.contain { object-fit: contain; padding: 1rem; }
+.card .body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
+.card h3 { margin: 0; }
+.card h3 a { color: var(--ink); text-decoration: none; }
+.card h3 a::after { content: ''; position: absolute; inset: 0; }
+.card p { margin: 0; color: var(--ink-soft); font-size: .98rem; }
+.card .meta { font-size: .9rem; color: var(--ink-soft); }
+
+/* Prose from markdown */
+.prose { max-width: 70ch; }
+.prose img { border-radius: var(--radius); margin: 1.5rem 0; }
+.prose ul { padding-left: 1.2rem; }
+.prose li { margin-bottom: .35rem; }
+.prose h2:first-child { margin-top: 0; }
+
+/* Info box */
+.info { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.3rem 1.4rem; }
+.info dl { margin: 0; display: grid; gap: .9rem; }
+.info dt { font-family: var(--font-head); font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--red); }
+.info dd { margin: .15rem 0 0; }
+.link-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
+.link-list a { font-weight: 600; }
+
+.two-col { display: grid; gap: 2.5rem; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 900px) { .two-col { grid-template-columns: minmax(0, 1fr) 340px; } }
+
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }

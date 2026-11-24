@@ -1,0 +1,40 @@
+---
+import { isExternal } from '../lib/content';
+interface Contact { name?: string; role?: string; phone?: string; email?: string }
+interface Props {
+  schedule?: string; location?: string; contacts?: Contact[];
+  links?: { label: string; url: string }[]; when?: string; where?: string; contactLabel?: string; moreLabel?: string;
+}
+const { schedule, location, contacts = [], links = [], when = 'When', where = 'Where', contactLabel = 'Contact', moreLabel = 'More information' } = Astro.props;
+const tel = (p: string) => `tel:${p.replace(/\D/g, '')}`;
+---
+{(schedule || location || contacts.length > 0 || links.length > 0) && (
+  <aside class="info">
+    <dl>
+      {schedule && <div><dt>{when}</dt><dd>{schedule}</dd></div>}
+      {location && <div><dt>{where}</dt><dd>{location}</dd></div>}
+      {contacts.length > 0 && (
+        <div><dt>{contactLabel}</dt>
+          {contacts.map((c) => (
+            <dd class="contact">
+              {c.name && <strong>{c.name}</strong>}{c.role && <span>{c.role}</span>}
+              {c.phone && <a href={tel(c.phone)}>{c.phone}</a>}
+              {c.email && <a href={`mailto:${c.email}`}>{c.email}</a>}
+            </dd>
+          ))}
+        </div>
+      )}
+      {links.length > 0 && (
+        <div><dt>{moreLabel}</dt>
+          <dd><ul class="link-list">
+            {links.map((l) => <li><a href={l.url} rel={isExternal(l.url) ? 'noopener' : undefined}>{l.label}</a></li>)}
+          </ul></dd>
+        </div>
+      )}
+    </dl>
+  </aside>
+)}
+<style>
+  .contact { display: flex; flex-direction: column; margin-bottom: .6rem; }
+  .contact span { color: var(--ink-soft); font-size: .95rem; }
+</style>

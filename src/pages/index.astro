@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import ProgramCard from '../components/ProgramCard.astro';
+import EventCard from '../components/EventCard.astro';
+import site from '../data/site.json';
+import { getPrograms, getEvents } from '../lib/content';
+import { useTranslations } from '../i18n/ui';
+const t = useTranslations('en');
+const programs = await getPrograms();
+const featured = programs.filter((p) => p.data.featured).slice(0, 4);
+const { upcoming } = await getEvents();
+
+const helpLinks = [
+  { href: '/programs/basic-needs-pantry/', label: 'Food and pantry', note: 'Free groceries twice a month' },
+  { href: '/programs/senior-services/', label: 'Older adults', note: 'Meals, rides and activities' },
+  { href: '/programs/#employment', label: 'Jobs and training', note: 'Construction, manufacturing, clean energy' },
+  { href: '/programs/youth-services/', label: 'Kids and teens', note: 'After-school programs' },
+  { href: '/programs/talk-to-a-lawyer/', label: 'Legal help', note: 'Free walk-in clinic, Thursdays' },
+  { href: '/programs/national-grid-consumer-advocacy/', label: 'Utility bills', note: 'National Grid help, monthly' },
+];
+---
+<Base title={site.name}>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Syracuse · Westcott neighborhood</p>
+        <h1>Your neighborhood community center</h1>
+        <p class="lead">{site.intro}</p>
+        <div class="actions">
+          <a class="btn" href="/programs/">Find a program</a>
+          <a class="btn ghost" href="/donate/">{t('nav.donate')}</a>
+        </div>
+      </div>
+      <div class="visit">
+        <h2>{t('home.visit')}</h2>
+        <p><strong>{site.centerAddress}</strong></p>
+        <p>{site.hours}</p>
+        <p><a href={`tel:${site.phone.replace(/\D/g, '')}`}>{site.phone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <a href={site.mapUrl} rel="noopener">{t('contact.directions')}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="first">{t('home.findHelp')}</h2>
+      <ul class="help">
+        {helpLinks.map((h) => (
+          <li><a href={h.href}><strong>{h.label}</strong><span>{h.note}</span></a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="row-head">
+        <h2 class="first">{t('home.featured')}</h2>
+        <a href="/programs/">{t('home.allPrograms')}</a>
+      </div>
+      <div class="grid">{featured.map((p) => <ProgramCard program={p} />)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="row-head">
+        <h2 class="first">{t('home.upcoming')}</h2>
+        <a href="/events/">{t('home.allEvents')}</a>
+      </div>
+      {upcoming.length ? (
+        <div class="grid">{upcoming.slice(0, 3).map((e) => <EventCard event={e} />)}</div>
+      ) : (
+        <p>{t('home.noEvents')} <a href="/events/">{t('events.weekly')}</a></p>
+      )}
+    </div>
+  </section>
+
+  <section class="section impact">
+    <div class="wrap">
+      <h2 class="first">{t('home.impact')}</h2>
+      <ul class="stats">
+        {site.stats.map((s) => <li><strong>{s.value}</strong><span>{s.label}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="first">{t('home.involved')}</h2>
+      <div class="grid involve">
+        <div class="card"><div class="body"><h3><a href="/donate/">{t('nav.donate')}</a></h3><p>Your gift is a long-term investment in our community.</p></div></div>
+        <div class="card"><div class="body"><h3><a href="/membership/">{t('nav.membership')}</a></h3><p>Support free and low-cost programs for $55 a year per family.</p></div></div>
+        <div class="card"><div class="body"><h3><a href="/volunteer/">{t('nav.volunteer')}</a></h3><p>Roles for every interest and schedule.</p></div></div>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .hero { background: linear-gradient(180deg, var(--cream), #fff); border-bottom: 1px solid var(--line); padding: 3rem 0; }
+  .hero-grid { display: grid; gap: 2rem; align-items: center; }
+  @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.4fr 1fr; } }
+  .hero h1 { max-width: 16ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+  .visit { background: #fff; border: 1px solid var(--line); border-top: 6px solid var(--red); border-radius: var(--radius); padding: 1.4rem 1.5rem; }
+  .visit h2 { margin-top: 0; font-size: 1.25rem; }
+  .visit p { margin-bottom: .6rem; }
+  .first { margin-top: 0; }
+  .row-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .5rem 1rem; margin-bottom: 1.25rem; }
+  .row-head h2 { margin: 0; }
+  .help { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+  .help a { display: flex; flex-direction: column; padding: 1rem 1.1rem; border: 1px solid var(--line); border-left: 5px solid var(--red); border-radius: 10px; text-decoration: none; color: var(--ink); min-height: 72px; }
+  .help a:hover { background: var(--red-tint); }
+  .help strong { font-family: var(--font-head); font-size: 1.05rem; }
+  .help span { color: var(--ink-soft); font-size: .95rem; }
+  .impact { background: var(--red); color: #fff; }
+  .stats { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .stats strong { display: block; font-family: var(--font-head); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.1; }
+  .stats span { font-size: 1rem; }
+</style>

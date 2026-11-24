@@ -1,0 +1,78 @@
+---
+import site from '../data/site.json';
+import { useTranslations, defaultLang, type Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+const path = Astro.url.pathname;
+const current = (href: string) => (href === '/' ? path === '/' : path.startsWith(href)) ? 'page' : undefined;
+
+const nav = [
+  { href: '/programs/', label: t('nav.programs') },
+  { href: '/events/', label: t('nav.events') },
+  { href: '/about/', label: t('nav.about') },
+  { href: '/volunteer/', label: t('nav.volunteer') },
+  { href: '/contact/', label: t('nav.contact') },
+];
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a href="/" class="brand" aria-label={`${site.name}, home`}>
+      <img src="/uploads/westcott-logo.png" alt="" width="56" height="54" />
+      <span><strong>Westcott</strong><span>Community Center</span></span>
+    </a>
+    <nav aria-label="Main">
+      <details class="menu" open>
+        <summary><span>{t('nav.menu')}</span></summary>
+        <ul>
+          {nav.map((n) => <li><a href={n.href} aria-current={current(n.href)}>{n.label}</a></li>)}
+          <li class="donate-item"><a class="btn" href="/donate/">{t('nav.donate')}</a></li>
+        </ul>
+      </details>
+    </nav>
+  </div>
+</header>
+<style>
+  .site-header { background: #fff; border-bottom: 1px solid var(--line); position: relative; z-index: 20; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 76px; }
+  .brand { display: flex; align-items: center; gap: .7rem; text-decoration: none; color: var(--ink); }
+  .brand img { width: 56px; height: auto; }
+  .brand > span { display: flex; flex-direction: column; font-family: var(--font-head); line-height: 1.1; }
+  .brand strong { font-size: 1.3rem; font-weight: 800; color: var(--red); letter-spacing: .02em; text-transform: uppercase; }
+  .brand > span > span { font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+
+  .menu summary {
+    list-style: none; cursor: pointer; font-family: var(--font-head); font-weight: 700;
+    border: 2px solid var(--ink); border-radius: 999px; padding: .5rem 1rem; min-height: 44px; display: flex; align-items: center;
+  }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu ul { list-style: none; margin: 0; padding: 0; }
+  .menu a { font-family: var(--font-head); font-weight: 700; color: var(--ink); text-decoration: none; }
+  .menu a[aria-current='page'] { color: var(--red); }
+
+  @media (max-width: 899px) {
+    .menu[open] ul {
+      position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid var(--line);
+      padding: .5rem 1rem 1.25rem; box-shadow: 0 12px 24px rgb(0 0 0 / .08);
+    }
+    .menu li a:not(.btn) { display: block; padding: .85rem .25rem; border-bottom: 1px solid var(--line); font-size: 1.1rem; }
+    .donate-item { padding-top: 1rem; }
+    .donate-item .btn { width: 100%; }
+  }
+  @media (min-width: 900px) {
+    .menu summary { display: none; }
+    /* Always show the links on wide screens, even if the details element is closed. */
+    .menu > ul { display: flex !important; align-items: center; gap: 1.6rem; }
+    .menu a:not(.btn):hover { color: var(--red); }
+    .menu a.btn { color: #fff; }
+  }
+</style>
+<script>
+  // The menu is open in the HTML so it works without JavaScript. On phones we close it
+  // and the Menu button opens it.
+  const menu = document.querySelector<HTMLDetailsElement>('.site-header details.menu');
+  const mq = window.matchMedia('(min-width: 900px)');
+  const sync = () => { if (menu) menu.open = mq.matches; };
+  sync();
+  mq.addEventListener('change', sync);
+</script>

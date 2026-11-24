@@ -1,0 +1,28 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import { useTranslations } from '../i18n/ui';
+const t = useTranslations('en');
+const page = (await getEntry('pages', 'donate'))!;
+const { Content } = await render(page);
+---
+<Base title={page.data.title} description={page.data.description} image={page.data.image}>
+  <div class="page-head"><div class="wrap"><h1>{page.data.title}</h1><p class="lead">{page.data.description}</p></div></div>
+  <div class="section">
+    <div class="wrap two-col">
+      <div class="prose"><Content /></div>
+      <aside class="info give">
+        <h2>{t('donate.online')}</h2>
+        <a class="btn" href={site.donateUrl} rel="noopener">{t('donate.paypal')}</a>
+        <a class="btn ghost" href={site.venmoUrl} rel="noopener">{t('donate.venmo')}</a>
+        <p class="small">Becoming a member? <a href="/membership/">Membership is $55 a year</a>.</p>
+      </aside>
+    </div>
+  </div>
+</Base>
+<style>
+  .give { display: flex; flex-direction: column; gap: .75rem; align-self: start; }
+  .give h2 { margin: 0 0 .25rem; font-size: 1.2rem; }
+  .small { font-size: .95rem; margin: .5rem 0 0; }
+</style>

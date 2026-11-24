@@ -1,0 +1,73 @@
+# Old WordPress addresses -> new pages. Works on Cloudflare Pages and Netlify.
+# Format: old-path  new-path  301
+
+/about-us/                                   /about/                                          301
+/meet-our-team/                              /about/leadership/                               301
+/board-of-directors/                         /about/leadership/                               301
+/employment-opportunities/                   /jobs/                                           301
+/contact-us/                                 /contact/                                        301
+/donations/                                  /donate/                                         301
+/services/                                   /programs/                                       301
+/employment-services/                        /programs/#employment                            301
+/collaborations/                             /programs/#collaborations                        301
+/food-pantry/                                /programs/basic-needs-pantry/                    301
+/food-farmacy/                               /programs/community-health-advocate/             301
+/food-ense/                                  /programs/food-sense/                            301
+/high-school-equivalency-program/            /programs/high-school-equivalency/               301
+/national-grid-consumer-advocacy/            /programs/national-grid-consumer-advocacy/       301
+/senior-services/                            /programs/senior-services/                       301
+/united-we-ride-senior-transportation/       /programs/senior-transportation/                 301
+/spectrum-learning-lab/                      /programs/spectrum-learning-lab/                 301
+/syracuse-eastside-farmers-market/           /programs/eastside-farmers-market/               301
+/talk-to-a-lawyer/                           /programs/talk-to-a-lawyer/                      301
+/youth-services/                             /programs/youth-services/                        301
+/nyserda-regional-clean-energy-hub-of-cny/   /programs/energysmart-cny/                       301
+/work-train-program/                         /programs/vehicles-to-work/                      301
+/admin-2/                                    /programs/bridge-to-manufacturing/               301
+/syracuse-build/                             /programs/syracuse-build/                        301
+/westcott-art-trail/                         /programs/westcott-art-trail/                    301
+/open-figure-drawing/                        /programs/open-figure-drawing/                   301
+/morningside-cultural-trails/                /programs/morningside-cultural-trails/           301
+/syracuse-community-center-collaborative/    /programs/syracuse-community-center-collaborative/ 301
+/united-neighborhood-houses/                 /programs/united-neighborhood-houses/            301
+
+# Old files that moved
+/wp-content/uploads/2026/03/Farmers-Market-App-2026.pdf                       /uploads/documents/farmers-market-application-2026.pdf   301
+/wp-content/uploads/2026/05/2026-Westcott-Art-Trail-Map-Brochure-for-Website.pdf /uploads/documents/art-trail-2026-map-brochure.pdf    301
+/wp-content/uploads/2026/05/Brochure-MAP-ZOOMED.pdf                           /uploads/documents/art-trail-2026-map-enlarged.pdf       301
+/wp-content/uploads/2026/05/2026-Map-Brochure-Artist-Details-for-Website.pdf  /uploads/documents/art-trail-2026-artist-list.pdf         301
+/wp-content/uploads/2022/11/Morningside-Cultural-Trail.pdf                    /uploads/documents/morningside-cultural-trail.pdf        301
+/wp-content/uploads/2022/11/Morningside-Cultural-Trails-Composite.pdf         /uploads/documents/morningside-cultural-trails-composite.pdf 301
+/wp-content/uploads/2022/11/Morningside-Heights-Trail.pdf                     /uploads/documents/morningside-heights-trail.pdf         301
+/wp-content/uploads/2022/11/Oakwood-Cemetery-Tree-Trail.pdf                   /uploads/documents/oakwood-cemetery-tree-trail.pdf       301
+/wp-content/uploads/2022/11/Oakwood-Cemetery-Flat-Trail.pdf                   /uploads/documents/oakwood-cemetery-flat-trail.pdf       301
+/wp-content/uploads/2022/11/Oakwood-Cemetery-Landscape-Trail.pdf              /uploads/documents/oakwood-cemetery-landscape-trail.pdf  301
+/wp-content/uploads/2022/11/Syracuse-University-PA-Trail.pdf                  /uploads/documents/syracuse-university-pa-trail.pdf      301
+
+# Leftover WordPress theme demo pages and system pages -> home
+/home-2/          /   301
+/home-3/          /   301
+/header-1/        /   301
+/header-2/        /   301
+/header-3/        /   301
+/header-4/        /   301
+/buttons/         /   301
+/icons/           /   301
+/counter/         /   301
+/lists/           /   301
+/lines-and-divider/ / 301
+/iconbox/         /   301
+/progress-bar/    /   301
+/testimonials/    /   301
+/imagebox/        /   301
+/partner-post/    /   301
+/pricing-table/   /   301
+/blog-posts/      /   301
+/gallery-post/    /   301
+/tabs/            /   301
+/google-map/      /   301
+/subscribe-form/  /   301
+/my-account/      /   301
+/wp-admin/*       /   301
+/wp-login.php     /   301
+/feed/*           /   301
