@@ -1,0 +1,24 @@
+{
+  "eyebrow": "Syracuse · Westcott neighborhood",
+  "headline": "Your neighborhood community center",
+  "primaryButton": { "label": "Find a program", "url": "/programs/" },
+  "secondaryButton": { "label": "Donate", "url": "/donate/" },
+  "helpTitle": "How can we help?",
+  "helpLinks": [
+    { "label": "Food and pantry", "note": "Free groceries twice a month", "url": "/programs/basic-needs-pantry/" },
+    { "label": "Older adults", "note": "Meals, rides and activities", "url": "/programs/senior-services/" },
+    { "label": "Jobs and training", "note": "Construction, manufacturing, clean energy", "url": "/programs/#employment" },
+    { "label": "Kids and teens", "note": "After-school programs", "url": "/programs/youth-services/" },
+    { "label": "Legal help", "note": "Free walk-in clinic, Thursdays", "url": "/programs/talk-to-a-lawyer/" },
+    { "label": "Utility bills", "note": "National Grid help, monthly", "url": "/programs/national-grid-consumer-advocacy/" }
+  ],
+  "featuredTitle": "Popular programs",
+  "eventsTitle": "Coming up",
+  "impactTitle": "Our impact",
+  "involvedTitle": "Get involved",
+  "involvedCards": [
+    { "label": "Donate", "note": "Your gift is a long-term investment in our community.", "url": "/donate/" },
+    { "label": "Membership", "note": "Support free and low-cost programs for $55 a year per family.", "url": "/membership/" },
+    { "label": "Volunteer", "note": "Roles for every interest and schedule.", "url": "/volunteer/" }
+  ]
+}

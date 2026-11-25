@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import ProgramCard from '../components/ProgramCard.astro';
 import EventCard from '../components/EventCard.astro';
 import site from '../data/site.json';
+import home from '../data/home.json';
 import { getPrograms, getEvents } from '../lib/content';
 import { useTranslations } from '../i18n/ui';
 const t = useTranslations('en');
@@ -10,25 +11,17 @@ const programs = await getPrograms();
 const featured = programs.filter((p) => p.data.featured).slice(0, 4);
 const { upcoming } = await getEvents();
 
-const helpLinks = [
-  { href: '/programs/basic-needs-pantry/', label: 'Food and pantry', note: 'Free groceries twice a month' },
-  { href: '/programs/senior-services/', label: 'Older adults', note: 'Meals, rides and activities' },
-  { href: '/programs/#employment', label: 'Jobs and training', note: 'Construction, manufacturing, clean energy' },
-  { href: '/programs/youth-services/', label: 'Kids and teens', note: 'After-school programs' },
-  { href: '/programs/talk-to-a-lawyer/', label: 'Legal help', note: 'Free walk-in clinic, Thursdays' },
-  { href: '/programs/national-grid-consumer-advocacy/', label: 'Utility bills', note: 'National Grid help, monthly' },
-];
 ---
 <Base title={site.name}>
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <p class="eyebrow">Syracuse · Westcott neighborhood</p>
-        <h1>Your neighborhood community center</h1>
+        {home.eyebrow && <p class="eyebrow">{home.eyebrow}</p>}
+        <h1>{home.headline}</h1>
         <p class="lead">{site.intro}</p>
         <div class="actions">
-          <a class="btn" href="/programs/">Find a program</a>
-          <a class="btn ghost" href="/donate/">{t('nav.donate')}</a>
+          <a class="btn" href={home.primaryButton.url}>{home.primaryButton.label}</a>
+          {home.secondaryButton.label && <a class="btn ghost" href={home.secondaryButton.url}>{home.secondaryButton.label}</a>}
         </div>
       </div>
       <div class="visit">
@@ -43,10 +36,10 @@ const helpLinks = [
 
   <section class="section">
     <div class="wrap">
-      <h2 class="first">{t('home.findHelp')}</h2>
+      <h2 class="first">{home.helpTitle}</h2>
       <ul class="help">
-        {helpLinks.map((h) => (
-          <li><a href={h.href}><strong>{h.label}</strong><span>{h.note}</span></a></li>
+        {home.helpLinks.map((h) => (
+          <li><a href={h.url}><strong>{h.label}</strong><span>{h.note}</span></a></li>
         ))}
       </ul>
     </div>
@@ -55,7 +48,7 @@ const helpLinks = [
   <section class="section alt">
     <div class="wrap">
       <div class="row-head">
-        <h2 class="first">{t('home.featured')}</h2>
+        <h2 class="first">{home.featuredTitle}</h2>
         <a href="/programs/">{t('home.allPrograms')}</a>
       </div>
       <div class="grid">{featured.map((p) => <ProgramCard program={p} />)}</div>
@@ -65,7 +58,7 @@ const helpLinks = [
   <section class="section">
     <div class="wrap">
       <div class="row-head">
-        <h2 class="first">{t('home.upcoming')}</h2>
+        <h2 class="first">{home.eventsTitle}</h2>
         <a href="/events/">{t('home.allEvents')}</a>
       </div>
       {upcoming.length ? (
@@ -78,7 +71,7 @@ const helpLinks = [
 
   <section class="section impact">
     <div class="wrap">
-      <h2 class="first">{t('home.impact')}</h2>
+      <h2 class="first">{home.impactTitle}</h2>
       <ul class="stats">
         {site.stats.map((s) => <li><strong>{s.value}</strong><span>{s.label}</span></li>)}
       </ul>
@@ -87,11 +80,9 @@ const helpLinks = [
 
   <section class="section">
     <div class="wrap">
-      <h2 class="first">{t('home.involved')}</h2>
+      <h2 class="first">{home.involvedTitle}</h2>
       <div class="grid involve">
-        <div class="card"><div class="body"><h3><a href="/donate/">{t('nav.donate')}</a></h3><p>Your gift is a long-term investment in our community.</p></div></div>
-        <div class="card"><div class="body"><h3><a href="/membership/">{t('nav.membership')}</a></h3><p>Support free and low-cost programs for $55 a year per family.</p></div></div>
-        <div class="card"><div class="body"><h3><a href="/volunteer/">{t('nav.volunteer')}</a></h3><p>Roles for every interest and schedule.</p></div></div>
+        {home.involvedCards.map((c) => <div class="card"><div class="body"><h3><a href={c.url}>{c.label}</a></h3><p>{c.note}</p></div></div>)}
       </div>
     </div>
   </section>

@@ -7,9 +7,15 @@ You can update the website yourself, from any computer, with no coding. Changes 
 1. Go to **https://westcottcc.org/admin/** (during review: the preview address + `/admin/`).
 2. Click **Sign in with GitHub** and use your GitHub account. If you don't have access yet, ask the site admin to invite you.
 
-You'll see a list on the left: **Events, Programs, Pages, Settings**.
+You'll see a list on the left: **Events, Programs, Pages, Home page, Settings**.
 
 ## Common tasks
+
+### Edit the home page
+- **Home page** in the editor: the headline, buttons, the "How can we help?" shortcut tiles, section titles and the "Get involved" cards.
+- **Popular programs:** open a program and turn on **Show on the home page** (the first four by order are shown).
+- **Coming up:** the next three events from **Events**, automatically.
+- **Intro text, address, hours, impact numbers:** **Settings → Contact info, hours, stats and sponsors**.
 
 ### Add an event
 1. Click **Events → New Event**.

@@ -124,6 +124,50 @@ collections:
       - { name: body, label: Page text, widget: markdown }
       - { name: lang, label: Language, widget: hidden, default: en }
 
+  - name: home
+    label: Home page
+    description: The headline, buttons, shortcut tiles and section titles on the home page. Popular programs, events and impact numbers come from Programs, Events and Settings.
+    files:
+      - name: home
+        label: Home page
+        file: src/data/home.json
+        fields:
+          - { name: eyebrow, label: Small text above the headline, widget: string, required: false }
+          - { name: headline, label: Headline, widget: string }
+          - name: primaryButton
+            label: Main button
+            widget: object
+            fields:
+              - { name: label, label: Button text, widget: string }
+              - { name: url, label: Link, widget: string }
+          - name: secondaryButton
+            label: Second button (leave text empty to hide)
+            widget: object
+            fields:
+              - { name: label, label: Button text, widget: string, required: false }
+              - { name: url, label: Link, widget: string, required: false }
+          - { name: helpTitle, label: Shortcut tiles title, widget: string }
+          - name: helpLinks
+            label: Shortcut tiles ("How can we help?")
+            widget: list
+            summary: "{{label}}"
+            fields:
+              - { name: label, label: Title, widget: string }
+              - { name: note, label: Short description, widget: string }
+              - { name: url, label: Link (e.g. /programs/senior-services/), widget: string }
+          - { name: featuredTitle, label: Popular programs title, widget: string }
+          - { name: eventsTitle, label: Events title, widget: string }
+          - { name: impactTitle, label: Impact numbers title, widget: string }
+          - { name: involvedTitle, label: Get involved title, widget: string }
+          - name: involvedCards
+            label: Get involved cards
+            widget: list
+            summary: "{{label}}"
+            fields:
+              - { name: label, label: Title, widget: string }
+              - { name: note, label: Short description, widget: string }
+              - { name: url, label: Link, widget: string }
+
   - name: settings
     label: Settings
     files:

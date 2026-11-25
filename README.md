@@ -21,6 +21,7 @@ The website for [Westcott Community Center](https://westcottcc.org), Syracuse NY
 | Programs | `src/content/programs/*.md` |
 | Events | `src/content/events/*.md` |
 | About, Donate, Membership, Volunteer, Jobs, Contact | `src/content/pages/*.md` |
+| Home page headline, shortcut tiles, section titles | `src/data/home.json` |
 | Contact info, hours, stats, sponsors, annual reports, announcement banner | `src/data/site.json` |
 | Leadership and board | `src/data/people.json` |
 | Images and PDFs | `public/uploads/` |
